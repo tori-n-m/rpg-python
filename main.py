@@ -23,6 +23,7 @@ action_wait_time = 90
 attack = False
 potion = False
 potion_effect = 15
+poison = False
 clicked = False
 game_over = 0
 
@@ -43,6 +44,7 @@ background_img = pygame.image.load('img/background/background.png').convert_alph
 panel_img = pygame.image.load('img/icons/panel.png').convert_alpha()
 #button images
 potion_img = pygame.image.load('img/icons/potion.png').convert_alpha()
+poison_img = pygame.image.load('img/icons/poison.png').convert_alpha()
 restart_img = pygame.image.load('img/icons/restart.png').convert_alpha()
 #load victory and defeat images
 victory_img = pygame.image.load('img/icons/victory.png').convert_alpha()
@@ -75,13 +77,14 @@ def draw_panel():
 
 #fighter class
 class Fighter():
-    def __init__(self, x, y, name, max_hp, strength, potions):
+    def __init__(self, x, y, name, max_hp, strength, potions, poisons):
           self.name = name
           self.max_hp = max_hp
           self.hp = max_hp
           self.strength = strength
           self.start_potions = potions
           self.potions = potions
+          self.poisons = poisons
           self.alive = True
           img = self.image = pygame.image.load(f'img/{self.name}/idle/2.png')
           self.image = pygame.transform.scale(img, (img.get_width() * 3, img.get_height() * 3))
@@ -146,9 +149,9 @@ class DamageText(pygame.sprite.Sprite):
 damage_text_group = pygame.sprite.Group()
 
 
-knight = Fighter(200, 285, 'knight', 30, 10, 3)
-bandit1 = Fighter(550, 285, 'bandit', 20, 6, 1)
-bandit2 = Fighter(700, 285, 'bandit', 20, 6, 1)
+knight = Fighter(200, 285, 'knight', 30, 10, 3, 2)
+bandit1 = Fighter(550, 285, 'bandit', 20, 6, 1, 0)
+bandit2 = Fighter(700, 285, 'bandit', 20, 6, 1, 0)
 
 bandit_list = []
 bandit_list.append(bandit1)
@@ -160,6 +163,7 @@ bandit2_health_bar = HealthBar(550, screen_height - bottom_panel + 100, bandit2.
 
 #create buttons
 potion_button = button.Button(screen, 100, screen_height - bottom_panel + 70, potion_img, 64, 64)
+poison_button = button.Button(screen, 170, screen_height - bottom_panel + 70, poison_img, 64, 64)
 restart_button = button.Button(screen, 330, 275, restart_img, 120, 30)
 
 
@@ -190,6 +194,7 @@ while run:
     #reset action variables
     attack = False
     potion = False
+    poison = False
     target = None
     #make sure mouse is visible
     pygame.mouse.set_visible(True)
@@ -205,8 +210,11 @@ while run:
                    target = bandit_list[count]
     if potion_button.draw():
          potion = True
+    if poison_button.draw():
+         poison = True
     #show number of potions remaining
     draw_text(str(knight.potions), font, red, 150, screen_height - bottom_panel + 70)
+    draw_text(str(knight.poisons), font, green, 220, screen_height - bottom_panel + 70)
 
     if game_over == 0:
 
