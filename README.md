@@ -16,6 +16,17 @@ Python RPG is a work in progress project made with Pygame. It is based on the Yo
 
 ### Installing
 
+#### Option 1
+
+Using Git:
+
+* 1. `git clone git@github.com:tori-n-m/rpg-python.git` or `git clone https://github.com/tori-n-m/rpg-python.git`
+* 2. Checkout to stable branch (main) or develop branch for a version with features in development.
+
+#### Option 2
+
+Using Github web:
+
 * 1. Go to the main page of this repository
 * 2. Click the green button that says "Code"
 * 3. Click "Download ZIP"
@@ -34,7 +45,19 @@ Python RPG is a work in progress project made with Pygame. It is based on the Yo
 * Where to download: https://www.python.org/downloads/
 * Beginner's Guide to downloading Python: https://wiki.python.org/moin/BeginnersGuide/Download
 
-### Downloading Pygame
+### Suggest creating a Virtual Environment
+
+Using venv:
+
+```
+python -m venv pyrpg
+
+source pyrpg/bin/activate
+
+pip install pygame
+```
+
+### Or download into base environment
 
 * Where to download: https://www.pygame.org/download.shtml
 * Beginner's Guide to downloading Pygame: https://www.pygame.org/wiki/GettingStarted
